@@ -71,6 +71,339 @@
           </div>
         </div>
       </div>
+      <!-- Form  -->
+      <form
+        [formGroup]="form"
+        (ngSubmit)="handleSubmit()"
+        class="incarico-form"
+      >
+        <!-- Verifiche -->
+        <div class="card">
+          <div class="card-header">Verifiche</div>
+          <div class="card-body grid-2">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                formControlName="verificaInsussistenza"
+                id="verificaInsussistenza"
+              />
+              <label for="verificaInsussistenza">Verifica Insussistenza</label>
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                formControlName="usoRiferimentoRegolamento"
+                id="usoRiferimentoRegolamento"
+              />
+              <label for="usoRiferimentoRegolamento"
+                >Uso Riferimento Regolamento</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                formControlName="componenteVariabileCompenso"
+                id="componenteVariabileCompenso"
+              />
+              <label for="componenteVariabileCompenso"
+                >Componente Variabile Compenso</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                formControlName="consulenteInformato"
+                id="consulenteInformato"
+              />
+              <label for="consulenteInformato">Consulente Informato</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Servizio Istituzione Pubblica -->
+        <div class="card">
+          <div class="card-header">Servizio istituzione pubblica</div>
+
+          <mat-form-field>
+            <mat-label for="servizoIstituzionePubblicaId"
+              >Servizio istituzione pubblica</mat-label
+            >
+            <mat-select
+              id="servizoIstituzionePubblicaId"
+              formControlName="servizoIstituzionePubblicaId"
+            >
+              <mat-option
+                [value]="item.id"
+                *ngFor="let item of servizoIstituzionePubblica"
+                >{{ item.descrizione }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Natura del conferimento -->
+        <div class="card">
+          <div class="card-header">Natura del conferimento</div>
+
+          <mat-form-field>
+            <mat-label for="naturaConferimentoId"
+              >Natura del conferimento</mat-label
+            >
+            <mat-select
+              id="naturaConferimentoId"
+              formControlName="naturaConferimentoId"
+            >
+              <mat-option
+                [value]="item.id"
+                *ngFor="let item of natureConferimento"
+                >{{ item.descrizione }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Ambito tematico -->
+        <div class="card">
+          <div class="card-header">Ambito tematico</div>
+
+          <mat-form-field>
+            <mat-label for="ambitoTematicoConsulenteId"
+              >Ambito tematico</mat-label
+            >
+            <mat-select
+              id="ambitoTematicoConsulenteId"
+              formControlName="ambitoTematicoConsulenteId"
+            >
+              <mat-option
+                [value]="item.id"
+                *ngFor="let item of ambitoTematico"
+                >{{ item.descrizione }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Dati Docente -->
+        <div class="card">
+          <div class="card-header">Dati Docente</div>
+
+          <mat-form-field class="example-full-width">
+            <mat-label for="codiceFiscale">Codice Fiscale</mat-label>
+            <input
+              matInput
+              id="codiceFiscale"
+              placeholder="Codice Fiscale"
+              formControlName="codiceFiscale"
+            />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label for="nome">Nome</mat-label>
+            <input
+              matInput
+              id="nome"
+              placeholder="Nome"
+              formControlName="nome"
+            />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label for="cognome">Cognome</mat-label>
+            <input
+              matInput
+              id="cognome"
+              placeholder="Cognome"
+              formControlName="cognome"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="dataNascita">Data di nascita</mat-label>
+            <input
+              id="dataNascita"
+              formControlName="dataNascita"
+              matInput
+              [matDatepicker]="picker"
+            />
+            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="genere">Genere</mat-label>
+            <mat-select id="genere" formControlName="genere">
+              <mat-option value="M">M</mat-option>
+              <mat-option value="F">F</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="oggettoIncaricoConsulenteId"
+              >Oggetto Incarico</mat-label
+            >
+            <mat-select
+              id="oggettoIncaricoConsulenteId"
+              formControlName="oggettoIncaricoConsulenteId"
+            >
+              <mat-option
+                *ngFor="let item of oggettiIncarico"
+                [value]="item.id"
+                >{{ item.descrizione }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <div class="form-check">
+            <input type="checkbox" formControlName="estero" id="estero" />
+            <label for="estero">Estero</label>
+          </div>
+        </div>
+        <!-- Documenti -->
+        <div class="card">
+          <div class="card-header">Documenti</div>
+          <!-- Upload -->
+          <div class="w-100 d-flex gap-2">
+            <div class="w-50 d-flex flex-column gap-2">
+              <label for="cv">Carica nuovo CV (PDF)</label>
+              <input
+                type="file"
+                id="cv"
+                accept="application/pdf"
+                (change)="onFileChange($event, 'cv')"
+              />
+            </div>
+            <div class="w-50 d-flex flex-column gap-2">
+              <label for="uploadDichiarazione"
+                >Carica Dichiarazione Svolgimento Altri Incarichi (PDF)</label
+              >
+              <input
+                type="file"
+                id="uploadDichiarazione"
+                accept="application/pdf"
+                (change)="
+                  onFileChange(
+                    $event,
+                    'dichiarazioneSvolgimentoAltriIncarichiBase64'
+                  )
+                "
+              />
+            </div>
+          </div>
+
+          <!-- Download -->
+          <div class="w-100 d-flex gap-2">
+            <div class="form-group w-50 mt-2 mb-0" *ngIf="form.value.cv">
+              <a
+                class="link"
+                [href]="'data:application/pdf;base64,' + form.value.cv"
+                download="Curriculum vitae.pdf"
+              >
+                Scarica Curriculum vitae (PDF)
+              </a>
+            </div>
+            <div
+              class="form-group w-50 mt-2 mb-0"
+              *ngIf="form.value.dichiarazioneSvolgimentoAltriIncarichiBase64"
+            >
+              <a
+                class="link"
+                [href]="
+                  'data:application/pdf;base64,' +
+                  form.value.dichiarazioneSvolgimentoAltriIncarichiBase64
+                "
+                download="Dichiarazione.pdf"
+              >
+                Scarica Dichiarazione PDF
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Date incarico -->
+        <div class="card">
+          <div class="card-header">Date incarico</div>
+          <div class="card-body grid-1">
+            <mat-form-field>
+              <mat-label for="dataInizio">Data Inizio</mat-label>
+              <input
+                id="dataInizio"
+                formControlName="dataInizio"
+                matInput
+                [matDatepicker]="pickerInizio"
+              />
+              <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerInizio></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label for="dataFine">Data Fine</mat-label>
+              <input
+                id="dataFine"
+                formControlName="dataFine"
+                matInput
+                [matDatepicker]="pickerFine"
+              />
+              <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerFine></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label for="dataConferimento">Data Conferimento</mat-label>
+              <input
+                id="dataConferimento"
+                formControlName="dataConferimento"
+                matInput
+                [matDatepicker]="pickerConf"
+              />
+              <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #pickerConf></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Tipo di saldo -->
+        <div class="card">
+          <div class="card-header">Tipo di saldo</div>
+
+          <mat-form-field>
+            <mat-label for="tipoDiSaldoId">Tipo di saldo</mat-label>
+            <mat-select id="tipoDiSaldoId" formControlName="tipoDiSaldoId">
+              <mat-option *ngFor="let item of saldoId" [value]="item.id">{{
+                item.descrizione
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label for="Compenso">Compenso</mat-label>
+            <input
+              matInput
+              type="number"
+              id="Compenso"
+              placeholder="Compenso"
+              formControlName="Compenso"
+            />
+          </mat-form-field>
+        </div>
+        <div class="w-100 d-flex justify-content-end gap-2">
+          <button (click)="handleSubmit()" class="btn_primary w-25">
+            Invia
+          </button>
+          <button class="btn_primary w-25">Bozza</button>
+        </div>
+      </form>
     </main>
   </div>
 </div>
