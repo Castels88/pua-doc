@@ -16,18 +16,18 @@
             "outputPath": "dist/pua-doc",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap-italia/dist/css/bootstrap-italia.min.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/bootstrap-italia/dist/js/bootstrap-italia.bundle.min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -79,22 +79,22 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-italia/dist/css/bootstrap-italia.min.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a86b77db-ab50-48f0-829b-ae4701cc1d1e"
   }
 }

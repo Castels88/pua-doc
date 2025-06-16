@@ -1,0 +1,76 @@
+<div class="course-info">
+  <div class="container-fluid">
+    <div class="sidebar-container">
+      <div class="sidebar">
+        <div class="sidebar-inner">
+          <div class="logo">
+            <img src="../assets/IMG/Cefpas.svg" alt="" />
+          </div>
+
+          <div class="user">
+            <div class="user-img">
+              <mat-icon class="material-icons">account_circle</mat-icon>
+            </div>
+            <div class="user-text">
+              <h4 class="name">TEST</h4>
+              <span class="role">DF</span>
+            </div>
+          </div>
+
+          <div class="logout">
+            <button class="logout-btn">
+              <mat-icon class="material-icons">logout</mat-icon> Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="course-info-container">
+      <div class="top-bar">
+        <div class="title d-flex">
+          <mat-icon class="material-icons icon p-1">chevron_left</mat-icon>
+          <h1 class="m-0">Aggiungi Docenti</h1>
+        </div>
+      </div>
+      <!-- Navigation Bar -->
+      <div class="toolsbar">
+        <div class="toolsbar-items">
+          <div class="item">
+            <a
+              routerLink="/homepage"
+              routerLinkActive="current"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="homepage"
+            >
+              Homepage
+            </a>
+          </div>
+
+          <div class="item">
+            <a
+              routerLink="/creati"
+              routerLinkActive="current"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="creati"
+            >
+              Creati
+              <!-- <span class="num important">3</span> -->
+            </a>
+          </div>
+
+          <div class="item">
+            <a
+              routerLink="/bozze"
+              routerLinkActive="current"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="bozze"
+            >
+              Bozze
+              <!-- <span class="num">1</span> -->
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

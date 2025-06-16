@@ -1,0 +1,89 @@
+.login-wrapper {
+  background-image: url("../../../assets/IMG/cefpas.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login {
+  background-color: #fff;
+  width: 50vw;
+  padding: 10px 30px 30px 30px;
+  border-radius: 20px;
+}
+.login .logo {
+  margin: 30px 0 50px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.login .logo img {
+  width: 30%;
+}
+.login h1 {
+  text-align: center;
+}
+.login .incorrect-login {
+  display: flex;
+  justify-content: center;
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+.login .incorrect-login .error-message {
+  background-color: #ffbebe;
+  color: #5a0000;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 40px;
+}
+.login .inner {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 0 30px;
+}
+.login .inner .input-flex {
+  display: flex;
+  align-items: center;
+}
+.login .inner .input-flex .viewPassword {
+  margin-left: -35px;
+  display: flex;
+  align-items: center;
+}
+.login .inner .input-flex .viewPassword span {
+  color: #6e6e6e;
+  cursor: pointer;
+}
+.login .inner .input-flex .viewPassword:hover span {
+  color: #4a4949;
+}
+.login .inner .submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.login .inner .submit button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 30px;
+}
+.login .loading {
+  background-color: #b0505b !important;
+}
+.login .loading:hover {
+  background-color: #b0505b;
+  cursor: not-allowed;
+}
+.is-invalid {
+  border: 1px solid red;
+}
+.inputDati {
+  width: 100%;
+}
