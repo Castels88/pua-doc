@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
@@ -78,6 +85,8 @@ export class HomepageComponent {
       ambitoTematicoConsulenteId: [''],
       oggettoIncaricoConsulenteId: [''],
       tipoDiSaldoId: [''],
+      procSelezione: [''],
+      obiettivoIncarico: [''],
 
       // Docente info
       codiceFiscale: [''],
@@ -89,17 +98,33 @@ export class HomepageComponent {
 
       // File base64 o dati upload
       dichiarazioneSvolgimentoAltriIncarichiBase64: [''],
-      cv: [''],
+      curriculumVitaeBase64: [''],
       // Date
       dataInizio: [''],
       dataFine: [''],
       dataConferimento: [''],
+      durataIncarico: [''],
 
       // Altro
       Compenso: [''],
+      CompensoErogato: [''],
     });
   }
+  updateDurataIncarico() {
+    const inizio = this.form.get('dataInizio')?.value;
+    const fine = this.form.get('dataFine')?.value;
 
+    if (inizio && fine) {
+      const start = new Date(inizio);
+      const end = new Date(fine);
+      const diff = Math.ceil(
+        (end.getTime() - start.getTime()) / (1000 * 3600 * 24)
+      );
+      this.form.get('durataIncarico')?.setValue(diff > 0 ? diff : 0);
+    } else {
+      this.form.get('durataIncarico')?.setValue(null);
+    }
+  }
   onFileChange(event: Event, controlName: string) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
