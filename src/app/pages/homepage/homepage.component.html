@@ -77,6 +77,227 @@
         (ngSubmit)="handleSubmit()"
         class="incarico-form"
       >
+        <!-- Dati Docente -->
+        <div class="card">
+          <div class="card-header">Dati incaricato</div>
+          <div class="w-100 d-flex justify-content-between gap-4">
+            <mat-form-field class="w-75">
+              <mat-label for="codiceFiscale">Codice Fiscale</mat-label>
+              <input
+                matInput
+                id="codiceFiscale"
+                placeholder="Codice Fiscale"
+                formControlName="codiceFiscale"
+              />
+            </mat-form-field>
+            <button class="w-25 fix-height btn_primary">
+              Cerca Codicefiscale
+            </button>
+          </div>
+          <div class="w-100 d-flex gap-2">
+            <mat-form-field class="w-50">
+              <mat-label for="nome">Nome</mat-label>
+              <input
+                matInput
+                id="nome"
+                placeholder="Nome"
+                formControlName="nome"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-50">
+              <mat-label for="cognome">Cognome</mat-label>
+              <input
+                matInput
+                id="cognome"
+                placeholder="Cognome"
+                formControlName="cognome"
+              />
+            </mat-form-field>
+          </div>
+          <div class="w-100 d-flex gap-2">
+            <mat-form-field class="w-75">
+              <mat-label for="dataNascita">Data di nascita</mat-label>
+              <input
+                id="dataNascita"
+                formControlName="dataNascita"
+                matInput
+                [matDatepicker]="picker"
+              />
+              <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="w-25">
+              <mat-label for="genere">Genere</mat-label>
+              <mat-select id="genere" formControlName="genere">
+                <mat-option value="M">M</mat-option>
+                <mat-option value="F">F</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field>
+            <mat-label for="oggettoIncaricoConsulenteId"
+              >Oggetto Incarico</mat-label
+            >
+            <mat-select
+              id="oggettoIncaricoConsulenteId"
+              formControlName="oggettoIncaricoConsulenteId"
+            >
+              <mat-option
+                *ngFor="let item of oggettiIncarico"
+                [value]="item.id"
+                >{{ item.descrizione }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <div class="form-check">
+            <input type="checkbox" formControlName="estero" id="estero" />
+            <label for="estero">Estero</label>
+          </div>
+        </div>
+        <!-- Obiettivo incarico -->
+        <div class="card">
+          <div class="card-header">Obiettivo incarico</div>
+
+          <mat-form-field class="example-full-width">
+            <mat-label for="obbIncarico">Obiettivo incarico</mat-label>
+            <textarea
+              id="obbIncarico"
+              formControlName="obiettivoIncarico"
+              matInput
+              placeholder="lorem ipsum"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <!-- Date incarico -->
+        <div class="card">
+          <div class="card-header">Date incarico</div>
+          <mat-form-field>
+            <mat-label for="dataInizio">Data Inizio</mat-label>
+            <input
+              id="dataInizio"
+              formControlName="dataInizio"
+              matInput
+              [matDatepicker]="pickerInizio"
+              (dateChange)="updateDurataIncarico()"
+            />
+            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="pickerInizio"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #pickerInizio></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label for="dataFine">Data Fine</mat-label>
+            <input
+              id="dataFine"
+              formControlName="dataFine"
+              matInput
+              [matDatepicker]="pickerFine"
+              (dateChange)="updateDurataIncarico()"
+            />
+            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="pickerFine"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #pickerFine></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Durata Incarico (giorni)</mat-label>
+            <input matInput formControlName="durataIncarico" readonly />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label for="dataConferimento">Data Conferimento</mat-label>
+            <input
+              id="dataConferimento"
+              formControlName="dataConferimento"
+              matInput
+              [matDatepicker]="pickerConf"
+            />
+            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="pickerConf"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #pickerConf></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <!-- Documenti -->
+        <div class="card">
+          <div class="card-header">Documenti</div>
+          <!-- Upload -->
+          <div class="w-100 d-flex gap-2">
+            <div class="w-50 d-flex flex-column gap-2">
+              <label for="cv">Carica nuovo CV (PDF)</label>
+              <input
+                type="file"
+                id="cv"
+                accept="application/pdf"
+                (change)="onFileChange($event, 'curriculumVitaeBase64')"
+              />
+            </div>
+            <div class="w-50 d-flex flex-column gap-2">
+              <label for="uploadDichiarazione"
+                >Carica Dichiarazione Svolgimento Altri Incarichi (PDF)</label
+              >
+              <input
+                type="file"
+                id="uploadDichiarazione"
+                accept="application/pdf"
+                (change)="
+                  onFileChange(
+                    $event,
+                    'dichiarazioneSvolgimentoAltriIncarichiBase64'
+                  )
+                "
+              />
+            </div>
+          </div>
+
+          <!-- Download -->
+          <div class="w-100 d-flex gap-2">
+            <div
+              class="form-group w-50 mt-2 mb-0"
+              *ngIf="form.value.curriculumVitaeBase64"
+            >
+              <a
+                class="link"
+                [href]="
+                  'data:application/pdf;base64,' +
+                  form.value.curriculumVitaeBase64
+                "
+                download="Curriculum vitae.pdf"
+              >
+                Scarica Curriculum vitae (PDF)
+              </a>
+            </div>
+            <div
+              class="form-group w-50 mt-2 mb-0"
+              *ngIf="form.value.dichiarazioneSvolgimentoAltriIncarichiBase64"
+            >
+              <a
+                class="link"
+                [href]="
+                  'data:application/pdf;base64,' +
+                  form.value.dichiarazioneSvolgimentoAltriIncarichiBase64
+                "
+                download="Dichiarazione.pdf"
+              >
+                Scarica Dichiarazione PDF
+              </a>
+            </div>
+          </div>
+        </div>
         <!-- Verifiche -->
         <div class="card">
           <div class="card-header">Verifiche</div>
@@ -196,257 +417,40 @@
             ></textarea>
           </mat-form-field>
         </div>
-        <!-- Obiettivo incarico -->
-        <div class="card">
-          <div class="card-header">Obiettivo incarico</div>
-
-          <mat-form-field class="example-full-width">
-            <mat-label for="obbIncarico">Obiettivo incarico</mat-label>
-            <textarea
-              id="obbIncarico"
-              formControlName="obiettivoIncarico"
-              matInput
-              placeholder="lorem ipsum"
-            ></textarea>
-          </mat-form-field>
-        </div>
-        <!-- Dati Docente -->
-        <div class="card">
-          <div class="card-header">Dati Docente</div>
-          <div class="w-100 d-flex justify-content-between gap-4">
-            <mat-form-field class="w-75">
-              <mat-label for="codiceFiscale">Codice Fiscale</mat-label>
-              <input
-                matInput
-                id="codiceFiscale"
-                placeholder="Codice Fiscale"
-                formControlName="codiceFiscale"
-              />
-            </mat-form-field>
-            <button class="w-25 fix-height btn_primary">
-              Cerca Codicefiscale
-            </button>
-          </div>
-
-          <mat-form-field class="example-full-width">
-            <mat-label for="nome">Nome</mat-label>
-            <input
-              matInput
-              id="nome"
-              placeholder="Nome"
-              formControlName="nome"
-            />
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <mat-label for="cognome">Cognome</mat-label>
-            <input
-              matInput
-              id="cognome"
-              placeholder="Cognome"
-              formControlName="cognome"
-            />
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label for="dataNascita">Data di nascita</mat-label>
-            <input
-              id="dataNascita"
-              formControlName="dataNascita"
-              matInput
-              [matDatepicker]="picker"
-            />
-            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label for="genere">Genere</mat-label>
-            <mat-select id="genere" formControlName="genere">
-              <mat-option value="M">M</mat-option>
-              <mat-option value="F">F</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label for="oggettoIncaricoConsulenteId"
-              >Oggetto Incarico</mat-label
-            >
-            <mat-select
-              id="oggettoIncaricoConsulenteId"
-              formControlName="oggettoIncaricoConsulenteId"
-            >
-              <mat-option
-                *ngFor="let item of oggettiIncarico"
-                [value]="item.id"
-                >{{ item.descrizione }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-
-          <div class="form-check">
-            <input type="checkbox" formControlName="estero" id="estero" />
-            <label for="estero">Estero</label>
-          </div>
-        </div>
-        <!-- Documenti -->
-        <div class="card">
-          <div class="card-header">Documenti</div>
-          <!-- Upload -->
-          <div class="w-100 d-flex gap-2">
-            <div class="w-50 d-flex flex-column gap-2">
-              <label for="cv">Carica nuovo CV (PDF)</label>
-              <input
-                type="file"
-                id="cv"
-                accept="application/pdf"
-                (change)="onFileChange($event, 'curriculumVitaeBase64')"
-              />
-            </div>
-            <div class="w-50 d-flex flex-column gap-2">
-              <label for="uploadDichiarazione"
-                >Carica Dichiarazione Svolgimento Altri Incarichi (PDF)</label
-              >
-              <input
-                type="file"
-                id="uploadDichiarazione"
-                accept="application/pdf"
-                (change)="
-                  onFileChange(
-                    $event,
-                    'dichiarazioneSvolgimentoAltriIncarichiBase64'
-                  )
-                "
-              />
-            </div>
-          </div>
-
-          <!-- Download -->
-          <div class="w-100 d-flex gap-2">
-            <div
-              class="form-group w-50 mt-2 mb-0"
-              *ngIf="form.value.curriculumVitaeBase64"
-            >
-              <a
-                class="link"
-                [href]="
-                  'data:application/pdf;base64,' +
-                  form.value.curriculumVitaeBase64
-                "
-                download="Curriculum vitae.pdf"
-              >
-                Scarica Curriculum vitae (PDF)
-              </a>
-            </div>
-            <div
-              class="form-group w-50 mt-2 mb-0"
-              *ngIf="form.value.dichiarazioneSvolgimentoAltriIncarichiBase64"
-            >
-              <a
-                class="link"
-                [href]="
-                  'data:application/pdf;base64,' +
-                  form.value.dichiarazioneSvolgimentoAltriIncarichiBase64
-                "
-                download="Dichiarazione.pdf"
-              >
-                Scarica Dichiarazione PDF
-              </a>
-            </div>
-          </div>
-        </div>
-        <!-- Date incarico -->
-        <div class="card">
-          <div class="card-header">Date incarico</div>
-          <mat-form-field>
-            <mat-label for="dataInizio">Data Inizio</mat-label>
-            <input
-              id="dataInizio"
-              formControlName="dataInizio"
-              matInput
-              [matDatepicker]="pickerInizio"
-              (dateChange)="updateDurataIncarico()"
-            />
-            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="pickerInizio"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #pickerInizio></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label for="dataFine">Data Fine</mat-label>
-            <input
-              id="dataFine"
-              formControlName="dataFine"
-              matInput
-              [matDatepicker]="pickerFine"
-              (dateChange)="updateDurataIncarico()"
-            />
-            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="pickerFine"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #pickerFine></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Durata Incarico (giorni)</mat-label>
-            <input matInput formControlName="durataIncarico" readonly />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label for="dataConferimento">Data Conferimento</mat-label>
-            <input
-              id="dataConferimento"
-              formControlName="dataConferimento"
-              matInput
-              [matDatepicker]="pickerConf"
-            />
-            <!-- <mat-hint>GG/MM/AAAA</mat-hint> -->
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="pickerConf"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #pickerConf></mat-datepicker>
-          </mat-form-field>
-        </div>
 
         <!-- Tipo di saldo -->
         <div class="card">
           <div class="card-header">Tipo di saldo</div>
-
-          <mat-form-field>
-            <mat-label for="tipoDiSaldoId">Tipo di saldo</mat-label>
-            <mat-select id="tipoDiSaldoId" formControlName="tipoDiSaldoId">
-              <mat-option *ngFor="let item of saldoId" [value]="item.id">{{
-                item.descrizione
-              }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <mat-label for="Compenso">Compenso presunto</mat-label>
-            <input
-              matInput
-              type="number"
-              id="Compenso"
-              placeholder="Compenso"
-              formControlName="Compenso"
-            />
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <mat-label for="CompensoErogato">Compenso erogato</mat-label>
-            <input
-              matInput
-              type="number"
-              id="CompensoErogato"
-              placeholder="Compenso erogato"
-              formControlName="CompensoErogato"
-            />
-          </mat-form-field>
+          <div class="w-100 d-flex gap-2">
+            <mat-form-field class="w-50">
+              <mat-label for="tipoDiSaldoId">Tipo di saldo</mat-label>
+              <mat-select id="tipoDiSaldoId" formControlName="tipoDiSaldoId">
+                <mat-option *ngFor="let item of saldoId" [value]="item.id">{{
+                  item.descrizione
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-25">
+              <mat-label for="Compenso">Compenso presunto</mat-label>
+              <input
+                matInput
+                type="number"
+                id="Compenso"
+                placeholder="Compenso"
+                formControlName="Compenso"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-25">
+              <mat-label for="CompensoErogato">Compenso erogato</mat-label>
+              <input
+                matInput
+                type="number"
+                id="CompensoErogato"
+                placeholder="Compenso erogato"
+                formControlName="CompensoErogato"
+              />
+            </mat-form-field>
+          </div>
         </div>
         <div class="w-100 d-flex justify-content-end gap-2">
           <button (click)="handleSubmit()" class="btn_primary w-25">
