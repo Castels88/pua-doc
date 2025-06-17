@@ -3,7 +3,7 @@
   font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: 40px;
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -74,7 +74,6 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .btn_primary {
@@ -305,6 +304,9 @@ main {
   font-family: inherit;
   cursor: pointer;
   transition: 300ms;
+  width: 66%;
+  height: 3rem;
+  margin-top: 1rem;
 }
 .sidebar .logout .logout-btn:hover {
   background-color: #525252;
@@ -316,6 +318,9 @@ main {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.user-img {
+  width: 20%;
 }
 .sidebar .user .user-img span {
   font-size: 65px;
